@@ -9,9 +9,9 @@ Gem::Specification.new do |spec|
   spec.version     = Kuberails::VERSION
   spec.authors     = ["Takahiro HAMAGUCHI"]
   spec.email       = ["tk.hamaguchi@gmail.com"]
-  spec.homepage    = "TODO"
-  spec.summary     = "TODO: Summary of Kuberails."
-  spec.description = "TODO: Description of Kuberails."
+  spec.homepage    = 'https://github.com/tk-hamaguchi/kuberails'
+  spec.summary     = %(Kubernetes controller and mapper for rails.)
+  spec.description = spec.summary
   spec.license     = "MIT"
 
   # Prevent pushing this gem to RubyGems.org. To allow pushes either set the 'allowed_push_host'
