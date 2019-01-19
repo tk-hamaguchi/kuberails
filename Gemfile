@@ -22,3 +22,5 @@ gem 'rspec_junit_formatter'
 gem 'rubocop', '0.63.0'
 gem 'rubocop-junit-formatter'
 gem 'rubocop-rspec'
+
+gem 'simplecov', require: false

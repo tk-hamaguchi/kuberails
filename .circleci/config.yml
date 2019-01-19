@@ -83,6 +83,9 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts
           destination: rspec
+      - store_artifacts:
+          path: coverage
+          destination: coverage
 
 
 workflows:
