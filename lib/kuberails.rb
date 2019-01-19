@@ -17,6 +17,8 @@ module Kuberails
   autoload :ConfigurationError,        'kuberails/errors/configuration_error'
   autoload :AdapterConfigurationError, 'kuberails/errors/adapter_configuration_error'
 
+  autoload :Logger, 'kuberails/logger'
+
   # Adapter modules for client libs
   #
   # @author tk.hamaguchi@gmail.com
@@ -28,4 +30,5 @@ module Kuberails
   end
 
   include Configure
+  include Logger
 end
