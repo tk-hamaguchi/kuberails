@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -16,3 +18,7 @@ gemspec
 
 gem 'rspec-rails', '~> 3.8'
 gem 'rspec_junit_formatter'
+
+gem 'rubocop', '0.63.0'
+gem 'rubocop-junit-formatter'
+gem 'rubocop-rspec'

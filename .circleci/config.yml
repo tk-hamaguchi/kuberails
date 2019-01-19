@@ -38,6 +38,28 @@ jobs:
       - run: bundle install --jobs=4 --retry=3 --deployment
       - save_bundle_cache
 
+  rubocop:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_bundle_cache
+      - run: mkdir /tmp/test-results /tmp/artifacts
+      - run: bundle install --deployment
+      - run:
+          name: lint check
+          command: |
+            bundle exec rubocop -D -R -c .rubocop.yml \
+              -r $(bundle show rubocop-junit-formatter)/lib/rubocop/formatter/junit_formatter.rb \
+              --format RuboCop::Formatter::JUnitFormatter --out /tmp/test-results/rubocop.xml \
+              -f html -o /tmp/artifacts/rubocop.html \
+              -fp
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: rubocop
+
   rspec:
     executor:
       name: default
@@ -67,6 +89,10 @@ workflows:
   build_and_test:
     jobs:
       - bundler
-      - rspec:
+      - rubocop:
           requires:
             - bundler
+      - rspec:
+          requires:
+            - rubocop
+
