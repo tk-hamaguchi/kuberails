@@ -3,7 +3,7 @@ version: 2.1
 executors:
   default:
     docker:
-      - image: circleci/ruby:2.5.3-node
+      - image: circleci/ruby:2.5.3
     working_directory: ~/workspace
     environment:
       BUNDLER_VERSION: 2.0.1
@@ -17,6 +17,11 @@ commands:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
   restore_bundle_cache:
     steps:
+      - run:
+          name: Install bundler v2
+          command: |
+            gem uninstall bundler
+            gem install bundler -v ${BUNDLER_VERSION} --no-document
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
@@ -30,16 +35,38 @@ jobs:
     steps:
       - checkout
       - restore_bundle_cache
-      - run:
-          name: Install bundler v2
-          command: |
-            gem uninstall bundler
-            gem install bundler -v ${BUNDLER_VERSION} --no-document
       - run: bundle install --jobs=4 --retry=3 --deployment
       - save_bundle_cache
+
+  rspec:
+    executor:
+      name: default
+    parallelism: 1
+    steps:
+      - checkout
+      - restore_bundle_cache
+      - run: mkdir /tmp/test-results /tmp/artifacts
+      - run: bundle install --deployment
+      - run:
+          name: run tests
+          command: |
+            TEST_FILES="$(circleci tests glob "spec/**/*_spec.rb" | circleci tests split --split-by=timings)"
+            bundle exec rspec \
+              --format RspecJunitFormatter --out /tmp/test-results/rspec.xml \
+              --format html --out /tmp/artifacts/rspec.html \
+              --format progress \
+              $TEST_FILES
+      - store_test_results:
+          path: /tmp/test-results
+      - store_artifacts:
+          path: /tmp/artifacts
+          destination: rspec
 
 
 workflows:
   build_and_test:
     jobs:
       - bundler
+      - rspec:
+          requires:
+            - bundler
