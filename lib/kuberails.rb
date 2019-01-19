@@ -9,5 +9,9 @@ require 'kuberails/engine'
 # @since   0.1.0
 #
 module Kuberails
-  # Your code goes here...
+
+  autoload :Error,                     'kuberails/errors/error'
+  autoload :ConfigurationError,        'kuberails/errors/configuration_error'
+  autoload :AdapterConfigurationError, 'kuberails/errors/adapter_configuration_error'
+
 end

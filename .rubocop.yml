@@ -51,3 +51,8 @@ Style/StringLiterals:
 
 RSpec/ContextWording:
   Enabled: false
+
+RSpec/FilePath:
+  Exclude:
+    - 'spec/lib/kuberails/errors/*'
+
