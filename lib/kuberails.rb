@@ -10,6 +10,8 @@ require 'kuberails/engine'
 #
 module Kuberails
 
+  autoload :Configuration, 'kuberails/configuration'
+
   autoload :Error,                     'kuberails/errors/error'
   autoload :ConfigurationError,        'kuberails/errors/configuration_error'
   autoload :AdapterConfigurationError, 'kuberails/errors/adapter_configuration_error'
@@ -23,5 +25,4 @@ module Kuberails
   module Adapters
     autoload :Base, 'kuberails/adapters/base'
   end
-
 end

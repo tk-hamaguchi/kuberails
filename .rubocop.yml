@@ -56,3 +56,5 @@ RSpec/FilePath:
   Exclude:
     - 'spec/lib/kuberails/errors/*'
 
+RSpec/NestedGroups:
+  Enabled: false
