@@ -27,6 +27,7 @@ module Kuberails
   #
   module Adapters
     autoload :Base, 'kuberails/adapters/base'
+    autoload :KubeclientAdapter, 'kuberails/adapters/kubeclient_adapter'
   end
 
   include Configure
