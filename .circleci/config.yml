@@ -8,6 +8,21 @@ executors:
     environment:
       BUNDLER_VERSION: 2.0.1
 
+  full_package:
+    docker:
+      - image: circleci/ruby:2.6
+        environment:
+          RAILS_ENV: test
+          BUNDLER_VERSION: 2.0.1
+          DATABASE_URL: mysql2://root:@127.0.0.1:3306/circle_test
+      - image: circleci/mysql:5.7
+        environment:
+          MYSQL_USER: root
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+          MYSQL_DATABASE: circle_test
+    working_directory: ~/workspace
+
+
 commands:
   save_bundle_cache:
     steps:
@@ -62,13 +77,14 @@ jobs:
 
   rspec:
     executor:
-      name: default
+      name: full_package
     parallelism: 1
     steps:
       - checkout
       - restore_bundle_cache
       - run: mkdir /tmp/test-results /tmp/artifacts
       - run: bundle install --deployment
+      - run: bundle exec rake db:setup
       - run:
           name: run tests
           command: |
@@ -83,6 +99,9 @@ jobs:
       - store_artifacts:
           path: /tmp/artifacts
           destination: rspec
+      - store_artifacts:
+          path: coverage
+          destination: coverage
 
   push:
     executor:

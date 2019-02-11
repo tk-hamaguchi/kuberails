@@ -1,8 +1,17 @@
 # frozen_string_literal: true
 
+ENV['RAILS_ENV'] ||= 'test'
+
+if ENV['RAILS_ENV'] == 'test' && ENV['CI'] == 'true'
+  require 'simplecov'
+  SimpleCov.start 'rails' do
+    add_filter 'lib/kuberails/version.rb'
+  end
+  puts 'required simplecov'
+end
+
 # This file is copied to spec/ when you run 'rails generate rspec:install'
 require 'spec_helper'
-ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('./dummy/config/environment', __dir__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
