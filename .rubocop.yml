@@ -4,7 +4,6 @@ AllCops:
   TargetRubyVersion: 2.6
   Exclude:
     - 'vendor/bundle/**/*'
-    - 'node_modules/**/*'
     - 'spec/dummy/**/*'
 
 Bundler/OrderedGems:
@@ -23,12 +22,20 @@ Layout/EmptyLinesAroundClassBody:
 Layout/EmptyLinesAroundModuleBody:
   Enabled: false
 
+Layout/ExtraSpacing:
+  Exclude:
+    - 'db/migrate/**/*'
+
 Metrics/BlockLength:
   Exclude:
     - 'spec/**/*.rb'
 
 Metrics/LineLength:
   Max: 120
+
+Metrics/MethodLength:
+  Exclude:
+    - 'db/migrate/**/*'
 
 Style/AsciiComments:
   Enabled: false
@@ -40,9 +47,19 @@ Style/BlockComments:
 Style/ClassAndModuleChildren:
   Enabled: false
 
+Style/Documentation:
+  Exclude:
+    - 'spec/**/*_spec.rb'
+    - 'db/migrate/**/*'
 
 Style/DocumentationMethod:
   Enabled: true
+  Exclude:
+    - 'db/migrate/**/*'
+
+Style/FrozenStringLiteralComment:
+  Exclude:
+    - 'db/migrate/**/*'
 
 Style/StringLiterals:
   Exclude:
