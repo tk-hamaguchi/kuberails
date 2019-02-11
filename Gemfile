@@ -12,4 +12,8 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-# gem 'byebug', group: [:development, :test]
+gem 'byebug', group: [:development, :test]
+
+gem 'mysql2'
+gem 'rspec-rails', '~> 3.8'
+gem 'rspec_junit_formatter'
