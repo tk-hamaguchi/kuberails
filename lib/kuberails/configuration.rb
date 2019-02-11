@@ -40,6 +40,11 @@ module Kuberails
       (@k8s_url.present? && @k8s_namespace.present? && @k8s_token.present?)
     end
 
+    # テンプレート出力先のディレクトリ
+    def app_dir
+      Rails.root.join 'app', 'kubernetes', 'templates'
+    end
+
     private
 
     def build_k8s_url(k8s_url)

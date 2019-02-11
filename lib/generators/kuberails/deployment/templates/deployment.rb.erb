@@ -1,0 +1,5 @@
+class <%= name.classify %>Deployment < Kuberails::Deployment
+  def template_path
+    'app/kubernetes/templates/deployments/<%= name.underscore %>.yaml.erb'
+  end
+end

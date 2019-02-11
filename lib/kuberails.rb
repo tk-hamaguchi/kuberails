@@ -18,6 +18,8 @@ module Kuberails
   autoload :Configuration, 'kuberails/configuration'
   autoload :Configure,     'kuberails/configure'
 
+  autoload :Adapter, 'kuberails/adapter'
+
   # Adapter modules for client libs
   #
   # @author tk.hamaguchi@gmail.com
@@ -25,9 +27,11 @@ module Kuberails
   # @since   0.1.0
   #
   module Adapters
-    autoload :Base, 'kuberails/adapters/base'
+    autoload :Base,       'kuberails/adapters/base'
+    autoload :Kubeclient, 'kuberails/adapters/kubeclient'
   end
 
   include Logger
   include Configure
+  include Adapter
 end
