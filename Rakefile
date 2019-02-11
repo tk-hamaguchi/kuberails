@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+default_tasks = %i[app:spec]
+
 begin
   require 'bundler/setup'
 rescue LoadError
@@ -22,3 +24,11 @@ load 'rails/tasks/engine.rake'
 load 'rails/tasks/statistics.rake'
 
 require 'bundler/gem_tasks'
+
+require 'rubocop/rake_task'
+RuboCop::RakeTask.new do |r|
+  r.patterns = %w[--rails --display-cop-names]
+end
+default_tasks << :rubocop
+
+task default: default_tasks

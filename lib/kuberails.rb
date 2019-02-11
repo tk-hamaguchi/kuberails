@@ -12,4 +12,8 @@ module Kuberails
   autoload :Error,                     'kuberails/errors/error'
   autoload :ConfigurationError,        'kuberails/errors/configuration_error'
   autoload :AdapterConfigurationError, 'kuberails/errors/adapter_configuration_error'
+
+  autoload :Logger, 'kuberails/logger'
+
+  include Logger
 end
