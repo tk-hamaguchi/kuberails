@@ -3,9 +3,3 @@ log/*.log
 pkg/
 spec/dummy/log/*.log
 spec/dummy/tmp/
-
-*.swp
-*.gem
-.DS_Store
-
-coverage
