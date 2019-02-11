@@ -23,3 +23,5 @@ gem 'rubocop', '0.64.0'
 gem 'rubocop-junit-formatter'
 gem 'rubocop-rspec'
 gem 'simplecov', require: false
+gem 'webmock'
+gem 'vcr'

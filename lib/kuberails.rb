@@ -2,7 +2,7 @@
 
 require 'kuberails/engine'
 
-# Kuberails
+# Kubernetes resource manager with rails
 #
 # @author tk.hamaguchi@gmail.com
 # @version 1.0.0
