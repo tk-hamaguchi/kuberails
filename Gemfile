@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -12,8 +14,11 @@ gemspec
 # your gem to rubygems.org.
 
 # To use a debugger
-gem 'byebug', group: [:development, :test]
+gem 'byebug', group: %i[development test]
 
 gem 'mysql2'
 gem 'rspec-rails', '~> 3.8'
 gem 'rspec_junit_formatter'
+gem 'rubocop', '0.64.0'
+gem 'rubocop-junit-formatter'
+gem 'rubocop-rspec'
