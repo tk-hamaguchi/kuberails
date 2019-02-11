@@ -15,5 +15,15 @@ module Kuberails
 
   autoload :Logger, 'kuberails/logger'
 
+  # Adapter modules for client libs
+  #
+  # @author tk.hamaguchi@gmail.com
+  # @version 1.0.0
+  # @since   0.1.0
+  #
+  module Adapters
+    autoload :Base, 'kuberails/adapters/base'
+  end
+
   include Logger
 end
