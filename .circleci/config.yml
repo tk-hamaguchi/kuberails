@@ -1,0 +1,63 @@
+version: 2.1
+
+executors:
+  default:
+    docker:
+      - image: circleci/ruby:2.6
+    working_directory: ~/workspace
+    environment:
+      BUNDLER_VERSION: 2.0.1
+
+commands:
+  save_bundle_cache:
+    steps:
+      - save_cache:
+          paths:
+            - ./vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+  restore_bundle_cache:
+    steps:
+      - run:
+          name: Install bundler v2
+          command: |
+            gem uninstall bundler
+            gem install bundler -v ${BUNDLER_VERSION} --no-document
+      - restore_cache:
+          keys:
+          - v1-dependencies-{{ checksum "Gemfile.lock" }}
+          - v1-dependencies-
+
+
+jobs:
+  bundler:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_bundle_cache
+      - run: bundle install --jobs=4 --retry=3 --deployment
+      - save_bundle_cache
+
+  push:
+    executor:
+      name: default
+    steps:
+      - checkout
+      - restore_bundle_cache
+      - run:
+          name: build gem
+          command: gem build kuberails.gemspec
+      - store_artifacts:
+          path: kuberails-*.gem
+          destination: packages
+
+
+workflows:
+  build_and_test:
+    jobs:
+      - bundler
+      - push:
+          requires:
+            - bundler
+
+
