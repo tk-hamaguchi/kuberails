@@ -15,6 +15,9 @@ module Kuberails
 
   autoload :Logger, 'kuberails/logger'
 
+  autoload :Configuration, 'kuberails/configuration'
+  autoload :Configure,     'kuberails/configure'
+
   # Adapter modules for client libs
   #
   # @author tk.hamaguchi@gmail.com
@@ -26,4 +29,5 @@ module Kuberails
   end
 
   include Logger
+  include Configure
 end

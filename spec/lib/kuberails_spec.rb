@@ -7,4 +7,8 @@ RSpec.describe Kuberails do
 
   it { is_expected.to respond_to :logger }
   it { is_expected.to respond_to :logger= }
+
+  it { is_expected.to respond_to :configuration }
+  it { is_expected.to respond_to :reset }
+  it { is_expected.to respond_to :configure }
 end
